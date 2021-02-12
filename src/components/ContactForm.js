@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 
 const ContactForm = () => {
   const [data, setData] = useState();
   const { register, errors, handleSubmit } = useForm({
-    mode: "onBlur",
+    mode: 'onBlur',
   });
   const onSubmit = (data) => {
     setData(data);
@@ -16,6 +17,7 @@ const ContactForm = () => {
         <div>
           <label htmlFor="firstName">First Name*</label>
           <input
+            id="firstName"
             name="firstName"
             placeholder="Edd"
             ref={register({ required: true, maxLength: 3 })}
@@ -39,12 +41,11 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email">
-            Email*
-          </label>
-          <input name="email" 
-            id="lastName"
-            placeholder="bluebill1049@hotmail.com"
+          <label htmlFor="email">Email* </label>
+          <input 
+            name="email" 
+            id="email"
+            placeholder="bill@Gmail.com"
             ref={register({ required: true })} 
           />
           {errors.email && (
@@ -60,11 +61,14 @@ const ContactForm = () => {
           />
         </div>
         {data && (
-          <pre style={{ textAlign: "left", color: "white" }}>
+          <pre 
+          aria-label="data-display"
+          style={{ textAlign: "left", color: "white" }}
+          >
             {JSON.stringify(data, null, 2)}
           </pre>
         )}
-        <input type="submit" />
+        <input type="submit" data-testid="submit" />
       </form>
     </div>
   );
